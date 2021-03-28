@@ -1,0 +1,49 @@
+* {
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+h1,
+h2,
+strong {
+  font-weight: 700;
+  font-family: Poppins, system-ui, sans-serif;
+}
+
+html,
+body {
+  background-color: var(--accents-0);
+  color: black;
+  font-family: Roboto, system-ui, sans-serif;
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+:root {
+  --primary: #ffffff;
+  --primary-2: #f1f3f5;
+  --secondary: #000000;
+  --secondary-2: #111;
+
+  --text-base: #000000;
+  --text-primary: #000000;
+  --text-secondary: white;
+
+  --accents-0: #f8f9fa;
+  --accents-1: #f1f3f5;
+  --accents-2: #e9ecef;
+  --accents-3: #dee2e6;
+}
