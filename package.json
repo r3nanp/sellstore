@@ -2,12 +2,30 @@
   "name": "sellstore",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://github.com/r3nanp/sellstore",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/r3nanp/sellstore.git"
+  },
+  "keywords": [
+    "sell",
+    "store",
+    "ecommerce"
+  ],
+  "bugs": {
+    "url": "https://github.com/r3nanp/sellstore/issues"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
     "test": "jest",
-    "test:dev": "jest --watchAll"
+    "test:watch": "jest --watch"
+  },
+  "engines": {
+    "node": "14.x"
   },
   "dependencies": {
     "autoprefixer": "^10.2.5",
@@ -29,6 +47,7 @@
     "eslint-config-prettier": "^8.1.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jest-dom": "^3.7.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-promise": "^4.3.1",
