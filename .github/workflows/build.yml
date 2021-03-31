@@ -3,22 +3,23 @@ name: build
 on: push
 
 jobs:
-  build:
+  code:
+    name: build
     runs-on: ubuntu-latest
-  steps:
-    - name: Checkout
-      uses: actions/checkout@v2
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
 
-    - name: Setup
-      uses: actions/setup-node@v1
-      with:
-        node-version: 14.x
+      - name: Use Node.js 14
+        uses: actions/setup-node@v1
+        with:
+          node-version: "14"
 
-    - name: Install dependencies
-      uses: bahmutov/npm-install@v1
+      - name: Install dependencies
+        uses: bahmutov/npm-install@v1
 
-    - name: Test
-      run: yarn test
+      - name: test
+        run: yarn test
 
-    - name: Build
-      run: yarn build
+      - name: build
+        run: yarn build
