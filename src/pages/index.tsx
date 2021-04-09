@@ -1,11 +1,13 @@
 import { ReactElement } from 'react'
+import { Header } from '@components/Header/Header'
+import { SEO } from '@components/SEO'
 
 export default function Home(): ReactElement {
   return (
-    <div className="bg-accents-0">
-      <p className="font-mono text-sm text-base">hello world</p>
+    <>
+      <SEO title="SellStore | HomePage" />
 
-      <h2 className="text-2xl">Teste</h2>
-    </div>
+      <Header />
+    </>
   )
 }

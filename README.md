@@ -11,7 +11,7 @@
 - Typescript
 - TailwindCSS
 
-# Contributing 🎉
+# 🎉 Contributing
 
 [Check this step by step](CONTRIBUTING.md)
 

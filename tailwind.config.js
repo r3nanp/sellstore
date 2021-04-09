@@ -23,7 +23,8 @@ module.exports = {
         'accents-0': 'var(--accents-0)',
         'accents-1': 'var(--accents-1)',
         'accents-2': 'var(--accents-2)',
-        'accents-3': 'var(--accents-3)'
+        'accents-3': 'var(--accents-3)',
+        overlay: 'var(--overlay)'
       }
     },
     textColor: {
