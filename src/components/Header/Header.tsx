@@ -1,9 +1,10 @@
 import { ReactElement, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { AiOutlineSearch } from 'react-icons/ai'
 import Bag from '@components/Icons/Bag'
 import { useCart } from 'hooks/useCart'
+import { UserAvatar } from '@components/UserAvatar'
+import { AiOutlineSearch } from 'react-icons/ai'
 
 export function Header(): ReactElement {
   const { openModal } = useCart()
@@ -17,10 +18,10 @@ export function Header(): ReactElement {
   return (
     <header className="w-full sticky top-0 flex items-center justify-between py-6 px-4 bg-accents-1">
       <div className="flex flex-1 items-center">
-        <h1 className="font-bold text-2xl">Shopping</h1>
+        <h1 className="font-bold text-2xl">SellStore</h1>
         <nav className="hidden ml-6 space-x-4 lg:block">
           <Link href="/">
-            <a className="text-gray-400 text-md">Todos</a>
+            <a className="text-gray-400 text-md hover:text-gray-500">All</a>
           </Link>
         </nav>
       </div>
@@ -61,9 +62,16 @@ export function Header(): ReactElement {
 
       <div className="flex flex-1 justify-end">
         <nav className="flex items-center">
-          <button onClick={openModal} className="cursor-pointer">
+          <button
+            onClick={openModal}
+            className="cursor-pointer hover:text-gray-500 transition ease-in-out duration-150 mr-6"
+          >
             <Bag className="hover:text-gray-500 transition ease-in-out duration-150" />
           </button>
+
+          <div className="space-y-3">
+            <UserAvatar />
+          </div>
         </nav>
       </div>
     </header>
