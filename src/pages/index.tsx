@@ -1,9 +1,9 @@
 import { ReactElement } from 'react'
 import { GetStaticProps } from 'next'
-import Link from 'next/link'
 import { api } from 'services/api'
 
 import { Header } from '@components/Header/Header'
+import { ProductCard } from '@components/ProductCard'
 import { SEO } from '@components/SEO'
 import { IProduct } from 'types/IProduct'
 
@@ -18,13 +18,11 @@ export default function Home({ products }: HomeProps): ReactElement {
 
       <Header />
 
-      {products.map((product, idx) => (
-        <div key={idx} className="">
-          <Link href={`/product/${product.id}`}>
-            <a>{product.name}</a>
-          </Link>
-        </div>
-      ))}
+      <div className="grid place-items-center gap-4 grid-cols-1 grid-rows-1 md:grid-cols-3 md:grid-rows-1">
+        {products.map((product, idx) => (
+          <ProductCard key={idx} {...product} />
+        ))}
+      </div>
     </>
   )
 }
