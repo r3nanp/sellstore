@@ -1,12 +1,15 @@
 import { ReactElement, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import Bag from '@components/Icons/Bag'
 import { useCart } from 'hooks/useCart'
+import { useAuth } from 'hooks/useAuth'
+
+import Bag from '@components/Icons/Bag'
 import { UserAvatar } from '@components/UserAvatar'
 import { AiOutlineSearch } from 'react-icons/ai'
 
 export function Header(): ReactElement {
+  const { user } = useAuth()
   const { openModal } = useCart()
 
   const router = useRouter()
@@ -70,7 +73,7 @@ export function Header(): ReactElement {
           </button>
 
           <div className="space-y-3">
-            <UserAvatar />
+            <UserAvatar {...user} />
           </div>
         </nav>
       </div>
