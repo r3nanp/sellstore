@@ -30,7 +30,8 @@ module.exports = {
     textColor: {
       base: 'var(--text-base)',
       primary: 'var(--text-primary)',
-      secondary: 'var(--text-secondary)'
+      secondary: 'var(--text-secondary)',
+      error: 'var(--text-error)'
     },
     boxShadow: {
       'outline-normal': '0 0 0 2px var(--accents-2)',

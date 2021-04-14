@@ -42,6 +42,7 @@ a {
   --text-base: #000000;
   --text-primary: #000000;
   --text-secondary: white;
+  --text-error: #ff0000;
 
   --accents-0: #f8f9fa;
   --accents-1: #f1f3f5;
