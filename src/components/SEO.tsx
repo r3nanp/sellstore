@@ -7,7 +7,7 @@ interface SEOProps {
 
 export function SEO({ title }: SEOProps): ReactElement {
   return (
-    <div>
+    <>
       <Head>
         <title>{title}</title>
 
@@ -39,6 +39,6 @@ export function SEO({ title }: SEOProps): ReactElement {
         />
         <meta name="twiiter:create" content="r3nanp" />
       </Head>
-    </div>
+    </>
   )
 }
