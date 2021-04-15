@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-types */
+/* eslint-disable @typescript-eslint/ban-types */ // using object type to make the UI agnostic
 import {
   createContext,
   ReactElement,
@@ -10,18 +10,10 @@ import { FormModal } from '@components/FormModal'
 import { api } from 'services/api'
 import Cookies from 'js-cookie'
 
-interface UserProps {
-  user: {
-    name: string
-    email: string
-    avatar_url: string
-  }
-}
-
 export interface AuthContextData {
   signed: boolean
   token: string | null
-  user: UserProps | null
+  user: object | null
   showModalForm: boolean
   showForm: () => void
   hideForm: () => void
@@ -37,7 +29,7 @@ interface AuthProviderProps {
 export const AuthContext = createContext({} as AuthContextData)
 
 export function AuthProvider({ children }: AuthProviderProps): ReactElement {
-  const [user, setUser] = useState<UserProps | null>(null)
+  const [user, setUser] = useState<object | null>(null)
   const [token, setToken] = useState<string | null>(null)
   const [showModalForm, setShowModalForm] = useState(false)
 
