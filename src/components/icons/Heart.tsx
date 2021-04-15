@@ -1,4 +1,7 @@
-const Heart = ({ ...props }) => {
+import { ReactElement } from 'react'
+import { IconsProps } from 'types/icons'
+
+const Heart = ({ ...props }: IconsProps): ReactElement => {
   return (
     <svg
       width="24"

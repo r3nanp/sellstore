@@ -4,8 +4,9 @@ import Link from 'next/link'
 import { useCart } from 'hooks/useCart'
 import { useAuth } from 'hooks/useAuth'
 
-import Bag from '@components/Icons/Bag'
 import { UserAvatar } from '@components/UserAvatar'
+import Bag from '@components/icons/Bag'
+import Heart from '@components/icons/Heart'
 import { AiOutlineSearch } from 'react-icons/ai'
 
 export function Header(): ReactElement {
@@ -19,7 +20,7 @@ export function Header(): ReactElement {
   }, [router])
 
   return (
-    <header className="w-full sticky top-0 flex items-center justify-between py-6 px-4 bg-accents-1">
+    <header className="w-full flex items-center justify-between py-6 px-4 bg-accents-1">
       <div className="flex flex-1 items-center">
         <h1 className="font-bold text-2xl">SellStore</h1>
         <nav className="hidden ml-6 space-x-4 lg:block">
@@ -36,7 +37,7 @@ export function Header(): ReactElement {
           </label>
           <input
             id="search"
-            className="bg-transparent rounded appearance-none border border-black flex items-center w-full px-3 py-2"
+            className="bg-transparent rounded-md appearance-none border border-black flex items-center w-full px-4 py-2 focus:outline-none"
             placeholder="Search for products"
             defaultValue={router.query.q}
             onKeyUp={(event) => {
@@ -69,8 +70,14 @@ export function Header(): ReactElement {
             onClick={openModal}
             className="cursor-pointer hover:text-gray-500 transition ease-in-out duration-150 mr-6"
           >
-            <Bag className="hover:text-gray-500 transition ease-in-out duration-150" />
+            <Bag />
           </button>
+
+          <Link href="/wishlist">
+            <a className="cursor-pointer hover:text-gray-500 transition ease-in-out duration-150 mr-6">
+              <Heart />
+            </a>
+          </Link>
 
           <div className="space-y-3">
             <UserAvatar {...user} />

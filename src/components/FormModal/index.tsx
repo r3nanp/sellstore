@@ -6,8 +6,8 @@ import * as yup from 'yup'
 
 import { useAuth } from 'hooks/useAuth'
 import { useClickOutside } from 'hooks/useClickOutside'
-import { Input } from '@components/Input/Input'
-import Cross from '@components/Icons/Cross'
+import { Input } from '@components/Input'
+import Cross from '@components/icons/Cross'
 
 interface FormProps {
   email: string
@@ -76,28 +76,18 @@ export function FormModal(): ReactElement {
             <Cross className="h-4 w-4" />
           </button>
           <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-mono mb-2"
-              htmlFor="email"
-            >
-              Email
-            </label>
             <Input
+              id="email"
+              label="Email"
               name="email"
               className="appearance-none border focus:border-blue-700 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="email"
               type="email"
               placeholder="example@example.com"
             />
           </div>
           <div className="mb-6">
-            <label
-              className="block text-gray-700 text-sm font-mono mb-2"
-              htmlFor="password"
-            >
-              Password
-            </label>
             <Input
+              label="Password"
               name="password"
               className="appearance-none border focus:border-blue-700 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
               id="password"

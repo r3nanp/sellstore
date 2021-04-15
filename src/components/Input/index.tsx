@@ -1,11 +1,14 @@
-import { ReactElement, useRef, useEffect, InputHTMLAttributes } from 'react'
+import { ReactElement, useRef, useEffect } from 'react'
 import { useField } from '@unform/core'
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface Props {
   name: string
+  label?: string
 }
 
-export function Input({ name, ...rest }: InputProps): ReactElement {
+type InputProps = JSX.IntrinsicElements['input'] & Props
+
+export function Input({ name, label, ...rest }: InputProps): ReactElement {
   const inputRef = useRef<HTMLInputElement>(null)
 
   const {
@@ -26,6 +29,14 @@ export function Input({ name, ...rest }: InputProps): ReactElement {
 
   return (
     <>
+      {label && (
+        <label
+          className="block text-gray-700 text-sm font-mono mb-2 mt-4"
+          htmlFor={fieldName}
+        >
+          {label}
+        </label>
+      )}
       <input
         className={
           error

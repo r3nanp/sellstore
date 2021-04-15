@@ -21,7 +21,7 @@ export function UserAvatar({
   return (
     <button
       onClick={signed ? showProfile : showForm}
-      className="block h-8 w-8 rounded-full overflow-hidden border-2 border-gray-600 focus:outline-none focus:border-white"
+      className="block h-8 w-8 rounded-full overflow-hidden border-2 hover:border-gray-900 border-gray-600 focus:outline-none focus:border-gray-600"
     >
       {signed ? (
         <img
