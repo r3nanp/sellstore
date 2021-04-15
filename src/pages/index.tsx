@@ -2,7 +2,7 @@ import { ReactElement } from 'react'
 import { GetStaticProps } from 'next'
 import { api } from 'services/api'
 
-import { Header } from '@components/Header/Header'
+import { Header } from '@components/Header'
 import { ProductCard } from '@components/ProductCard'
 import { SEO } from '@components/SEO'
 import { IProduct } from 'types/IProduct'
