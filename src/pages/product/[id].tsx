@@ -1,11 +1,12 @@
 import { ReactElement } from 'react'
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 import { useRouter } from 'next/router'
-
-import { Header } from '@components/Header/Header'
 import { api } from 'services/api'
+
+import { Header } from '@components/Header'
 import { SEO } from '@components/SEO'
 import { IProduct } from 'types/IProduct'
+import { Button } from '@components/Button'
 
 export default function Slug({
   product
@@ -43,15 +44,11 @@ export default function Slug({
                   })}
                 </span>
               </div>
-              <button
-                type="button"
-                onClick={() => {
-                  console.log('click')
-                }}
-                className="w-1/2 p-4 mt-6 uppercase rounded text-secondary font-sans font-bold bg-black cursor-pointer border border-black transition hover:bg-white hover:text-primary"
-              >
-                Add to cart
-              </button>
+              <div className="w-1/2">
+                <Button type="button" onClick={() => console.log('click')}>
+                  Add to cart
+                </Button>
+              </div>
             </div>
           </div>
         </section>
