@@ -22,7 +22,9 @@ export function Header(): ReactElement {
   return (
     <header className="w-full flex items-center justify-between py-6 px-4 bg-accents-1">
       <div className="flex flex-1 items-center">
-        <h1 className="font-bold text-2xl">SellStore</h1>
+        <Link href="/">
+          <a className="font-bold text-2xl font-sans">SellStore</a>
+        </Link>
         <nav className="hidden ml-6 space-x-4 lg:block">
           <Link href="/">
             <a className="text-gray-400 text-md hover:text-gray-500">All</a>
