@@ -1,25 +1,29 @@
 name: build
-
-on: push
+on: pull_request
 
 jobs:
-  code:
-    name: build
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Use Node.js 14
+      - name: Setup Node
         uses: actions/setup-node@v1
         with:
-          node-version: "14"
+          node-version: 14.x
 
       - name: Install dependencies
-        uses: bahmutov/npm-install@v1
+        run: yarn install
 
-      - name: test
+      - name: Linting
+        run: yarn lint
+
+      - name: Update Test
+        run: yarn test -u
+
+      - name: Test
         run: yarn test
 
-      - name: build
+      - name: Build
         run: yarn build
