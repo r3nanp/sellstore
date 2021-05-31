@@ -19,11 +19,11 @@ interface SignProps {
 export default function CreateAccount(): ReactElement {
   const { createAccount } = useAuth()
 
-  const router = useRouter()
   const formRef = useRef<FormHandles>(null)
+  const router = useRouter()
 
   const handleSubmit: SubmitHandler<SignProps> = useCallback(
-    async (data, { reset }, event) => {
+    async ({ email, name, password }, { reset }, event) => {
       try {
         formRef.current.setErrors({})
 
@@ -33,15 +33,21 @@ export default function CreateAccount(): ReactElement {
           password: yup.string().min(7).required()
         })
 
-        await schema.validate(data, {
-          abortEarly: false
-        })
+        await schema.validate(
+          { email, name, password },
+          {
+            abortEarly: false
+          }
+        )
 
         event.preventDefault()
-
         reset()
 
-        await createAccount(data)
+        createAccount({
+          email,
+          name,
+          password
+        })
         router.push('/')
       } catch (error) {
         const validationErrors = {}
@@ -72,7 +78,7 @@ export default function CreateAccount(): ReactElement {
           onSubmit={handleSubmit}
           className="bg-white w-full max-w-xs shadow-magical rounded p-4"
         >
-          <Input id="name" name="email" type="text" label="Name" />
+          <Input id="name" name="name" type="text" label="Name" />
 
           <Input id="email" name="email" type="email" label="Email" />
 

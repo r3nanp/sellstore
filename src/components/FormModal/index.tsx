@@ -22,7 +22,7 @@ export function FormModal(): ReactElement {
   useClickOutside(divRef, hideForm)
 
   const handleSubmit: SubmitHandler<FormProps> = useCallback(
-    async (data, { reset }, event) => {
+    async ({ email, password }, { reset }, event) => {
       try {
         formRef.current.setErrors({})
 
@@ -31,13 +31,16 @@ export function FormModal(): ReactElement {
           password: yup.string().min(7).required()
         })
 
-        await schema.validate(data, {
-          abortEarly: false
-        })
+        await schema.validate(
+          { email, password },
+          {
+            abortEarly: false
+          }
+        )
 
         event.preventDefault()
 
-        await signIn(data)
+        await signIn({ email, password })
 
         reset()
       } catch (error) {
