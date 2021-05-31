@@ -80,7 +80,6 @@ export function FormModal(): ReactElement {
               id="email"
               label="Email"
               name="email"
-              className="appearance-none border focus:border-blue-700 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="email"
               placeholder="example@example.com"
             />
@@ -89,7 +88,6 @@ export function FormModal(): ReactElement {
             <Input
               label="Password"
               name="password"
-              className="appearance-none border focus:border-blue-700 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
               id="password"
               type="password"
               placeholder="******************"
