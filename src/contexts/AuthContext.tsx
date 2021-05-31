@@ -6,20 +6,30 @@ import {
   useEffect,
   useState
 } from 'react'
+import { GetServerSidePropsContext } from 'next'
+import { useRouter } from 'next/router'
 import { FormModal } from '@components/FormModal'
+import { setCookie, destroyCookie } from 'nookies'
 import { api } from 'services/api'
-import Cookies from 'js-cookie'
+
+type CreateUserProps = {
+  name: string
+  email: string
+  password: string
+}
+
+type SignInData = Omit<CreateUserProps, 'name'>
 
 export interface AuthContextData {
   signed: boolean
+  showModalForm: boolean
   token: string | null
   user: object | null
-  showModalForm: boolean
   showForm: () => void
   hideForm: () => void
-  signOut: () => void
-  signIn: (data: unknown) => Promise<void>
-  createAccount: (data: unknown) => Promise<void>
+  signIn: ({ email, password }: SignInData) => Promise<void>
+  createAccount: ({ name, email, password }: CreateUserProps) => Promise<void>
+  signOut: (ctx: GetServerSidePropsContext) => void
 }
 
 interface AuthProviderProps {
@@ -33,34 +43,44 @@ export function AuthProvider({ children }: AuthProviderProps): ReactElement {
   const [token, setToken] = useState<string | null>(null)
   const [showModalForm, setShowModalForm] = useState(false)
 
+  const router = useRouter()
+
   useEffect(() => {
-    Cookies.set('user', JSON.stringify(user))
-    Cookies.set('token', token)
+    setCookie(undefined, 'user', JSON.stringify(user))
+    setCookie(undefined, 'token', token)
   }, [user, token])
 
   const showForm = () => setShowModalForm(true)
 
   const hideForm = () => setShowModalForm(false)
 
-  async function createAccount(data: unknown): Promise<void> {
-    await api.post('/users', data)
+  async function createAccount({
+    name,
+    email,
+    password
+  }: CreateUserProps): Promise<void> {
+    await api.post('/users', { name, email, password })
 
-    hideForm()
+    router.push('/')
   }
 
-  async function signIn(data: unknown): Promise<void> {
-    const response = await api.post('/sessions', data)
+  async function signIn({ email, password }: SignInData): Promise<void> {
+    const { data: response } = await api.post('/sessions', {
+      name,
+      email,
+      password
+    })
 
-    api.defaults.headers.authorization = `Bearer ${response.data.token}`
+    api.defaults.headers.Authorization = `Bearer ${response.token}`
 
     hideForm()
 
-    setUser(response.data.user)
-    setToken(response.data.token)
+    setUser(response.user)
+    setToken(response.token)
   }
 
-  function signOut(): void {
-    Cookies.remove('user')
+  function signOut(ctx: GetServerSidePropsContext): void {
+    destroyCookie(ctx, 'user')
     setUser(null)
   }
 
@@ -69,13 +89,13 @@ export function AuthProvider({ children }: AuthProviderProps): ReactElement {
       value={{
         signed: !!user,
         token,
-        createAccount,
         user,
+        showModalForm,
+        createAccount,
         signIn,
         signOut,
         showForm,
-        hideForm,
-        showModalForm
+        hideForm
       }}
     >
       {children}
