@@ -5,8 +5,14 @@ import { api } from 'services/api'
 
 import { Header } from '@components/Header'
 import { SEO } from '@components/SEO'
-import { IProduct } from 'types/IProduct'
 import { Button } from '@components/Button'
+
+type IProduct = {
+  id: string
+  name: string
+  quantity: number
+  price: number
+}
 
 export default function Slug({
   product
@@ -60,20 +66,22 @@ export default function Slug({
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { id } = params
 
-  const product = await api.get(`/products/${id}`)
-  const data = await product.data
+  const { data } = await api.get(`/products/${id}`)
+
+  const product = {
+    id: data.id
+  }
 
   return {
     props: {
-      product: data
+      product
     },
     revalidate: 22400
   }
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const request = await api.get('/products')
-  const data = await request.data
+  const { data } = await api.get('/products')
 
   const paths = data.map((path: IProduct) => {
     return {
@@ -85,6 +93,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths,
-    fallback: true
+    fallback: 'blocking'
   }
 }
