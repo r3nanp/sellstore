@@ -1,10 +1,16 @@
 import { ReactElement, useState } from 'react'
 import Link from 'next/link'
-import { IProduct } from 'types/IProduct'
 
 import { AiOutlineShoppingCart } from 'react-icons/ai'
 import Heart from '@components/icons/Heart'
 import Eye from '@components/icons/Eye'
+
+type IProduct = {
+  id: string
+  name: string
+  quantity: number
+  price: number
+}
 
 export function ProductCard({
   id,
@@ -59,7 +65,7 @@ export function ProductCard({
             </button>
           </div>
           <div>
-            <Link href={`product/${id}`}>
+            <Link href={`/product/${id}`}>
               <a className="p-4 w-full text-sm uppercase rounded text-secondary font-mono bg-black cursor-pointer border border-black transition hover:bg-white hover:text-primary">
                 <AiOutlineShoppingCart className="w-4 h-4 inline mr-2" />
                 Add to cart
