@@ -5,7 +5,13 @@ import { api } from 'services/api'
 import { Header } from '@components/Header'
 import { ProductCard } from '@components/ProductCard'
 import { SEO } from '@components/SEO'
-import { IProduct } from 'types/IProduct'
+
+type IProduct = {
+  id: string
+  name: string
+  quantity: number
+  price: number
+}
 
 interface HomeProps {
   products: IProduct[]
@@ -28,13 +34,12 @@ export default function Home({ products }: HomeProps): ReactElement {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const request = await api.get('/products')
-  const response = await request.data
+  const { data } = await api.get('/products')
 
   return {
     props: {
-      products: response
+      products: data
     },
-    revalidate: 60 * 60 * 4
+    revalidate: 60 * 60 * 24
   }
 }
