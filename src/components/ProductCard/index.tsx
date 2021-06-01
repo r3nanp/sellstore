@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { AiOutlineShoppingCart } from 'react-icons/ai'
 import Heart from '@components/icons/Heart'
 import Eye from '@components/icons/Eye'
+import { currencyHelper } from 'utils/currencyHelper'
 
 type IProduct = {
   id: string
@@ -50,9 +51,10 @@ export function ProductCard({
           </div>
           <div className="p-2 text-right">
             <div className="text-secondary font-semibold text-lg font-sans">
-              {price.toLocaleString('pt-BR', {
-                style: 'currency',
-                currency: 'BRL'
+              {currencyHelper({
+                locale: 'pt-BR',
+                value: price,
+                currencyStyle: 'BRL'
               })}
             </div>
           </div>
