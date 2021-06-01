@@ -37,7 +37,7 @@ export function SEO({ title }: SEOProps): ReactElement {
           name="twitter:description"
           content="A store to sell the bests products!"
         />
-        <meta name="twiiter:create" content="r3nanp" />
+        <meta name="twiiter:create" content="SellStore" />
       </Head>
     </>
   )
