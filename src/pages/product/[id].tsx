@@ -1,11 +1,11 @@
 import { ReactElement } from 'react'
-import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
-import { useRouter } from 'next/router'
+import { GetStaticPaths, GetStaticProps } from 'next'
 import { api } from 'services/api'
 
 import { Header } from '@components/Header'
 import { SEO } from '@components/SEO'
 import { Button } from '@components/Button'
+import { currencyHelper } from 'utils/currencyHelper'
 
 type IProduct = {
   id: string
@@ -14,15 +14,11 @@ type IProduct = {
   price: number
 }
 
-export default function Slug({
-  product
-}: InferGetStaticPropsType<typeof getStaticProps>): ReactElement {
-  const { isFallback } = useRouter()
+type ProductProps = {
+  product: IProduct
+}
 
-  if (isFallback) {
-    return <p>Loading...</p>
-  }
-
+export default function Slug({ product }: ProductProps): ReactElement {
   return (
     <>
       <SEO title={`SellStore | ${product.name}`} />
@@ -44,10 +40,7 @@ export default function Slug({
                   </p>
                 </div>
                 <span className="text-center font-bold text-xl">
-                  {product.price.toLocaleString('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL'
-                  })}
+                  {product.price}
                 </span>
               </div>
               <div className="w-1/2">
@@ -69,14 +62,21 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { data } = await api.get(`/products/${id}`)
 
   const product = {
-    id: data.id
+    id: data.id,
+    name: data.name,
+    price: currencyHelper({
+      currencyStyle: 'BRL',
+      locale: 'pt-BR',
+      value: data.price
+    }),
+    quantity: data.quantity
   }
 
   return {
     props: {
       product
     },
-    revalidate: 22400
+    revalidate: 60 * 60 * 60 // 2.5 days
   }
 }
 
