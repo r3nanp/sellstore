@@ -15,13 +15,9 @@ export const CartContext = createContext({} as CartContextData)
 export function CartProvider({ children }: CartProps): ReactElement {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  function closeModal() {
-    setIsModalOpen(false)
-  }
+  const closeModal = () => setIsModalOpen(false)
 
-  function openModal() {
-    setIsModalOpen(true)
-  }
+  const openModal = () => setIsModalOpen(true)
 
   return (
     <CartContext.Provider value={{ closeModal, openModal }}>
