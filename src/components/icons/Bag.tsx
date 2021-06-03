@@ -1,10 +1,8 @@
-import { ReactElement } from 'react'
+import { HTMLAttributes } from 'react'
 
-interface BagProps {
-  [key: string]: string
-}
+interface BagProps extends HTMLAttributes<HTMLOrSVGElement> {}
 
-const Bag = ({ ...props }: BagProps): ReactElement => {
+const Bag = ({ ...props }: BagProps) => {
   return (
     <svg
       width="20"

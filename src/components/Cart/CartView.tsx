@@ -1,9 +1,8 @@
-import { ReactElement } from 'react'
 import Bag from '@components/icons/Bag'
 import Cross from '@components/icons/Cross'
 import { useCart } from 'hooks/useCart'
 
-export function CartView(): ReactElement {
+export function CartView() {
   const { closeModal } = useCart()
 
   return (

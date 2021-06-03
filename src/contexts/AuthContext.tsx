@@ -1,15 +1,11 @@
 /* eslint-disable @typescript-eslint/ban-types */ // using object type to make the UI agnostic
-import {
-  createContext,
-  ReactElement,
-  ReactNode,
-  useEffect,
-  useState
-} from 'react'
+
+import { createContext, ReactNode, useEffect, useState } from 'react'
 import { setCookie, destroyCookie, parseCookies } from 'nookies'
-import { useRouter } from 'next/router'
-import { recoverUserInformation, signInRequest } from 'services/auth'
+import Router from 'next/router'
 import { api } from 'services/api'
+import { recoverUserInformation, signInRequest } from 'services/auth'
+
 import { FormModal } from '@components/FormModal'
 
 type CreateUserProps = {
@@ -37,11 +33,9 @@ interface AuthProviderProps {
 
 export const AuthContext = createContext({} as AuthContextData)
 
-export function AuthProvider({ children }: AuthProviderProps): ReactElement {
+export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<object | null>(null)
   const [showModalForm, setShowModalForm] = useState(false)
-
-  const router = useRouter()
 
   useEffect(() => {
     const { 'sellstore.token': token } = parseCookies()
@@ -55,17 +49,13 @@ export function AuthProvider({ children }: AuthProviderProps): ReactElement {
 
   const hideForm = () => setShowModalForm(false)
 
-  async function createAccount({
-    name,
-    email,
-    password
-  }: CreateUserProps): Promise<void> {
+  async function createAccount({ name, email, password }: CreateUserProps) {
     await api.post('/users', { name, email, password })
 
-    router.push('/')
+    Router.push('/')
   }
 
-  async function signIn({ email, password }: SignInData): Promise<void> {
+  async function signIn({ email, password }: SignInData) {
     const { token, user } = await signInRequest({ email, password })
 
     api.defaults.headers.Authorization = `Bearer ${token}`
@@ -79,7 +69,7 @@ export function AuthProvider({ children }: AuthProviderProps): ReactElement {
     hideForm()
   }
 
-  function signOut(): void {
+  function signOut() {
     destroyCookie(undefined, 'sellstore.token')
     setUser(null)
   }

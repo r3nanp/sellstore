@@ -1,7 +1,8 @@
-import { ReactElement } from 'react'
-import { IconsProps } from 'types/icons'
+import { HTMLAttributes } from 'react'
 
-const Eye = ({ ...props }: IconsProps): ReactElement => {
+interface EyeProps extends HTMLAttributes<HTMLOrSVGElement> {}
+
+const Eye = ({ ...props }: EyeProps) => {
   return (
     <svg viewBox="0 0 24 24" width="24" height="24" fill="none" {...props}>
       <path

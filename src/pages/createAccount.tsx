@@ -52,7 +52,7 @@ export default function CreateAccount(): ReactElement {
       } catch (error) {
         const validationErrors = {}
         if (error instanceof yup.ValidationError) {
-          error.inner.forEach((error) => {
+          error.inner.forEach(error => {
             validationErrors[error.path] = error.message
           })
           formRef.current.setErrors(validationErrors)

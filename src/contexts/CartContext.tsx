@@ -1,7 +1,7 @@
-import { ReactElement, createContext, ReactNode, useState } from 'react'
+import { createContext, ReactNode, useState } from 'react'
 import { CartView } from '@components/Cart/CartView'
 
-export interface CartContextData {
+interface CartContextData {
   closeModal: () => void
   openModal: () => void
 }
@@ -12,7 +12,7 @@ interface CartProps {
 
 export const CartContext = createContext({} as CartContextData)
 
-export function CartProvider({ children }: CartProps): ReactElement {
+export function CartProvider({ children }: CartProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const closeModal = () => setIsModalOpen(false)
@@ -21,8 +21,8 @@ export function CartProvider({ children }: CartProps): ReactElement {
 
   return (
     <CartContext.Provider value={{ closeModal, openModal }}>
-      {isModalOpen && <CartView />}
       {children}
+      {isModalOpen && <CartView />}
     </CartContext.Provider>
   )
 }

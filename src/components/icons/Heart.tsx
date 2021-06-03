@@ -1,7 +1,8 @@
-import { ReactElement } from 'react'
-import { IconsProps } from 'types/icons'
+import { HTMLAttributes } from 'react'
 
-const Heart = ({ ...props }: IconsProps): ReactElement => {
+interface HeartProps extends HTMLAttributes<HTMLOrSVGElement> {}
+
+const Heart = ({ ...props }: HeartProps) => {
   return (
     <svg
       width="24"

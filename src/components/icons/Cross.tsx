@@ -1,6 +1,8 @@
-import { ReactElement } from 'react'
+import { HTMLAttributes } from 'react'
 
-const Cross = ({ ...props }): ReactElement => {
+interface CrossProps extends HTMLAttributes<HTMLOrSVGElement> {}
+
+const Cross = ({ ...props }: CrossProps) => {
   return (
     <svg
       viewBox="0 0 24 24"
