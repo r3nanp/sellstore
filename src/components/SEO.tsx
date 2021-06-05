@@ -10,13 +10,13 @@ export function SEO({ title }: SEOProps) {
       <Head>
         <title>{title}</title>
 
-        <link rel="shortcut icon" href="/favicon.ico" />
+        <meta name="theme-color" content="#ffffff" />
         <meta name="keywords" content="sell, store, ecommerce" />
         <meta
           name="description"
           content="A store to sell the bests products!"
         />
-
+        <meta property="og:type" content="website" />
         <meta property="og:site_name" content="SellStore" />
         <meta property="og:title" content="SellStore" />
         <meta
