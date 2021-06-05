@@ -6,7 +6,7 @@
 ![prs](https://img.shields.io/static/v1?label=PRs&message=welcome&style=for-the-badge&color=24B36B&labelColor=000000)
 ![style: tailwindcss](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
-# Technologies used 🛠
+# 🛠 Technologies used
 
 - Next
 - Typescript
