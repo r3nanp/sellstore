@@ -15,7 +15,7 @@ interface FormProps {
 }
 
 export function FormModal(): ReactElement {
-  const { signIn, hideForm, showModalForm } = useAuth()
+  const { signIn, hideForm, isModalFormOpen } = useAuth()
 
   const formRef = useRef<FormHandles>(null)
   const divRef = useRef<HTMLDivElement>(null)
@@ -46,7 +46,7 @@ export function FormModal(): ReactElement {
       } catch (error) {
         const validationErrors = {}
         if (error instanceof yup.ValidationError) {
-          error.inner.forEach((error) => {
+          error.inner.forEach(error => {
             validationErrors[error.path] = error.message
           })
           formRef.current.setErrors(validationErrors)
@@ -59,7 +59,7 @@ export function FormModal(): ReactElement {
   return (
     <div
       className="top-0 left-0 right-0 bottom-0 bg-overlay overflow-hidden flex items-center justify-center fixed z-5"
-      aria-hidden={!showModalForm}
+      aria-hidden={!isModalFormOpen}
     >
       <div
         ref={divRef}
@@ -74,7 +74,7 @@ export function FormModal(): ReactElement {
             type="button"
             className="absolute right-2 top-2 border-none bg-transparent"
             onClick={hideForm}
-            aria-hidden={!showModalForm}
+            aria-hidden={!isModalFormOpen}
           >
             <Cross className="h-4 w-4" />
           </button>
