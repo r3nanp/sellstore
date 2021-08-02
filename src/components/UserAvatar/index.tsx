@@ -10,7 +10,7 @@ interface UserAvatarProps {
 export function UserAvatar({ name, avatar_url }: UserAvatarProps) {
   const { signed, showForm } = useAuth()
 
-  const showProfile = () => Router.push('/profile')
+  const showProfile = () => Router.push('/profile/me')
 
   return (
     <button
