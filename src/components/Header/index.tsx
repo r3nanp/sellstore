@@ -42,7 +42,7 @@ export function Header(): ReactElement {
             className="bg-transparent rounded-md appearance-none border border-black flex items-center w-full px-4 py-2 focus:outline-none"
             placeholder="Search for products"
             defaultValue={router.query.q}
-            onKeyUp={(event) => {
+            onKeyUp={event => {
               event.preventDefault()
 
               if (event.key === 'Enter') {
