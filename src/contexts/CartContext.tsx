@@ -1,5 +1,6 @@
-import { createContext, ReactNode, useState } from 'react'
+import { createContext, ReactNode } from 'react'
 import { CartView } from '@components/Cart/CartView'
+import { useToggle } from 'hooks/useToggle'
 
 interface CartContextData {
   closeModal: () => void
@@ -13,16 +14,16 @@ interface CartProps {
 export const CartContext = createContext({} as CartContextData)
 
 export function CartProvider({ children }: CartProps) {
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isModalCartOpen, toggleModalCartOpen] = useToggle(false)
 
-  const closeModal = () => setIsModalOpen(false)
+  const closeModal = () => toggleModalCartOpen()
 
-  const openModal = () => setIsModalOpen(true)
+  const openModal = () => toggleModalCartOpen()
 
   return (
     <CartContext.Provider value={{ closeModal, openModal }}>
       {children}
-      {isModalOpen && <CartView />}
+      {isModalCartOpen && <CartView closeModal={closeModal} />}
     </CartContext.Provider>
   )
 }

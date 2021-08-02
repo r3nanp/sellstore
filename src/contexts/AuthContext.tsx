@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/ban-types */ // using object type to make the UI agnostic
-
+import Router from 'next/router'
 import { createContext, ReactNode, useEffect, useState } from 'react'
 import { setCookie, destroyCookie, parseCookies } from 'nookies'
-import Router from 'next/router'
 import { api } from 'services/api'
+import { useToggle } from 'hooks/useToggle'
 import { recoverUserInformation, signInRequest } from 'services/auth'
 
 import { FormModal } from '@components/FormModal'
@@ -18,13 +18,13 @@ type SignInData = Omit<CreateUserProps, 'name'> // omit the name parameter
 
 export interface AuthContextData {
   signed: boolean
-  showModalForm: boolean
+  isModalFormOpen: boolean
   user: object | null
   showForm: () => void
   hideForm: () => void
   signOut: () => void
-  signIn: ({ email, password }: SignInData) => Promise<void>
-  createAccount: ({ name, email, password }: CreateUserProps) => Promise<void>
+  signIn: (props: SignInData) => Promise<void>
+  createAccount: (props: CreateUserProps) => Promise<void>
 }
 
 interface AuthProviderProps {
@@ -35,7 +35,7 @@ export const AuthContext = createContext({} as AuthContextData)
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<object | null>(null)
-  const [showModalForm, setShowModalForm] = useState(false)
+  const [isModalFormOpen, toggleModalForm] = useToggle(false)
 
   useEffect(() => {
     const { 'sellstore.token': token } = parseCookies()
@@ -45,9 +45,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   }, [])
 
-  const showForm = () => setShowModalForm(true)
+  const showForm = () => toggleModalForm()
 
-  const hideForm = () => setShowModalForm(false)
+  const hideForm = () => toggleModalForm()
 
   async function createAccount({ name, email, password }: CreateUserProps) {
     await api.post('/users', { name, email, password })
@@ -79,7 +79,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       value={{
         signed: !!user,
         user,
-        showModalForm,
+        isModalFormOpen,
         createAccount,
         signIn,
         signOut,
@@ -88,7 +88,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       }}
     >
       {children}
-      {showModalForm && <FormModal />}
+      {isModalFormOpen && <FormModal />}
     </AuthContext.Provider>
   )
 }
