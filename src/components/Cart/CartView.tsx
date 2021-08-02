@@ -1,10 +1,11 @@
 import Bag from '@components/icons/Bag'
 import Cross from '@components/icons/Cross'
-import { useCart } from 'hooks/useCart'
 
-export function CartView() {
-  const { closeModal } = useCart()
+type CartProps = {
+  closeModal: () => void
+}
 
+export function CartView({ closeModal }: CartProps) {
   return (
     <div className="h-full flex flex-col text-base bg-accents-1 shadow-xl overflow-y-auto">
       <div className="h-full flex flex-col bg-secondary">
